@@ -61,6 +61,16 @@ Training: `MultipleNegativesRankingLoss`, lr 2e-5, fp16.
 
 Mine hard negatives from top-k retrieval results, evaluate `multilingual-e5-large` and BGE-M3, add stemming to the BM25 baseline, diversify query types beyond factoid questions, and average results across several seeds.
 
+## Final Results (3 seeds)
+
+| Method | Accuracy@1 | nDCG@10 |
+|---|---|---|
+| Baseline (no fine-tuning) | 0.618 | 0.821 |
+| Fine-tuned, random negatives | 0.629 ± 0.008 | 0.838 ± 0.004 |
+| **Fine-tuned, hard negatives** | **0.641 ± 0.005** | **0.845 ± 0.003** |
+
+Each configuration was trained with 3 seeds (42, 43, 44) to separate real effects from initialization noise — a single-seed comparison earlier in this project showed a spread (0.635–0.659) larger than the apparent gain between methods. With multiple seeds, hard negatives show a consistent improvement over random negatives (+1.2 pp Accuracy@1) that exceeds the standard deviation of either method, and notably lower variance (±0.005 vs ±0.008), suggesting more stable training.
+
 ## Stack
 
 Python, PyTorch, sentence-transformers, rank_bm25, Hugging Face Datasets and Hub, Google Colab (T4).
