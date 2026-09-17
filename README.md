@@ -1,3 +1,4 @@
+<img width="865" height="557" alt="4" src="https://github.com/user-attachments/assets/ff30c690-75e7-41f6-b29d-a93323870034" />
 # Kyrgyz-E5: Adapting Multilingual Embeddings for Kyrgyz Semantic Retrieval
 
 Fine-tuning multilingual embedding models for semantic search and RAG in Kyrgyz — a low-resource Turkic language with roughly 5 million speakers.
@@ -68,6 +69,9 @@ Mine hard negatives from top-k retrieval results, evaluate `multilingual-e5-larg
 | Baseline (no fine-tuning) | 0.618 | 0.821 |
 | Fine-tuned, random negatives | 0.629 ± 0.008 | 0.838 ± 0.004 |
 | **Fine-tuned, hard negatives** | **0.641 ± 0.005** | **0.845 ± 0.003** |
+
+<img width="865" height="557" alt="4" src="https://github.com/user-attachments/assets/f2bff51b-fd4c-4eb4-9cbe-85efd16a4672" />
+
 
 Each configuration was trained with 3 seeds (42, 43, 44) to separate real effects from initialization noise — a single-seed comparison earlier in this project showed a spread (0.635–0.659) larger than the apparent gain between methods. With multiple seeds, hard negatives show a consistent improvement over random negatives (+1.2 pp Accuracy@1) that exceeds the standard deviation of either method, and notably lower variance (±0.005 vs ±0.008), suggesting more stable training.
 
