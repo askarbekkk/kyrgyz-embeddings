@@ -1,3 +1,6 @@
+<img width="875" height="557" alt="3" src="https://github.com/user-attachments/assets/ffda2368-48d0-45a9-9b4e-2f5882b5994c" />
+
+
 <img width="865" height="557" alt="4" src="https://github.com/user-attachments/assets/ff30c690-75e7-41f6-b29d-a93323870034" />
 # Kyrgyz-E5: Adapting Multilingual Embeddings for Kyrgyz Semantic Retrieval
 
