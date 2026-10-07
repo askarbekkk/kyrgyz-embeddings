@@ -6,6 +6,30 @@
 
 Fine-tuning multilingual embedding models for semantic search and RAG in Kyrgyz — a low-resource Turkic language with roughly 5 million speakers.
 
+## Update: corrected evaluation + external benchmark
+
+**Bug found in the original evaluation.** Distractors were drawn from the same passage pool the queries were generated from, so 58 of 170 gold passages also appeared in the corpus under a second ID. Retrieving that identical copy was scored as a miss, which deflated every method. After removing the duplicates:
+
+| Method | Accuracy@1 | nDCG@10 |
+|---|---|---|
+| BM25 | 0.729 | 0.811 |
+| multilingual-e5-base (untuned) | 0.877 | 0.921 |
+| e5-base fine-tuned, random negatives | 0.906 | 0.944 |
+| **e5-base fine-tuned, hard negatives** | **0.918** | **0.950** |
+
+**External test: [Belebele](https://huggingface.co/datasets/facebook/belebele) (`kir_Cyrl`).** 900 human-written questions; the model must retrieve the right FLORES passage among 488 passages plus 5,000 Wikipedia distractors. No Belebele data was used in training.
+
+| Method | Accuracy@1 | nDCG@10 |
+|---|---|---|
+| BM25 | 0.484 | 0.572 |
+| multilingual-e5-base (untuned) | 0.559 | 0.671 |
+| e5-base fine-tuned, random negatives | **0.740** | 0.808 |
+| e5-base fine-tuned, hard negatives | 0.734 | **0.811** |
+
+**Takeaways.** Fine-tuning on ~1.5k synthetic Wikipedia pairs gives **+18 pp Accuracy@1** on human-written questions from a different domain, and the untuned neural model already clearly beats BM25. Adding E5's `query:` / `passage:` prefixes did not help (untuned: 0.847 vs 0.877 Accuracy@1). Training used the unfiltered pairs; the LLM-filtered set has not been tried yet.
+
+> The sections below were written before this fix. Their absolute numbers and the conclusions that depend on them (e.g. BM25 vs. untuned E5) are superseded by the tables above.
+
 ## Motivation
 
 Kyrgyz NLP resources on Hugging Face cover speech recognition, text-to-speech, and translated knowledge benchmarks, but no widely evaluated embedding model optimized for Kyrgyz semantic retrieval was identified. This project measures how well existing multilingual models handle Kyrgyz retrieval, whether they beat a classical lexical baseline, and how much domain adaptation helps.
