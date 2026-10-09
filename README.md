@@ -28,6 +28,21 @@ Fine-tuning multilingual embedding models for semantic search and RAG in Kyrgyz 
 
 **Takeaways.** Fine-tuning on ~1.5k synthetic Wikipedia pairs gives **+18 pp Accuracy@1** on human-written questions from a different domain, and the untuned neural model already clearly beats BM25. Adding E5's `query:` / `passage:` prefixes did not help (untuned: 0.847 vs 0.877 Accuracy@1). Training used the unfiltered pairs; the LLM-filtered set has not been tried yet.
 
+**Zero-shot comparison of multilingual encoders.** Same setup as above (fixed synthetic test and Belebele), Accuracy@1 / nDCG@10:
+
+| Model | Synthetic (fixed) | Belebele |
+|---|---|---|
+| **BAAI/bge-m3** | **0.929 / 0.958** | **0.794 / 0.866** |
+| e5-base fine-tuned, hard negatives (ours) | 0.918 / 0.950 | 0.734 / 0.810 |
+| multilingual-e5-large | 0.888 / 0.929 | 0.552 / 0.688 |
+| multilingual-e5-base | 0.876 / 0.921 | 0.560 / 0.671 |
+| multilingual-e5-small | 0.829 / 0.892 | 0.432 / 0.560 |
+| Qwen3-Embedding-0.6B | 0.794 / 0.867 | 0.543 / 0.634 |
+| BM25 | 0.729 / 0.811 | 0.484 / 0.572 |
+| LaBSE | 0.524 / 0.631 | 0.443 / 0.550 |
+
+BGE-M3 without any Kyrgyz fine-tuning is the strongest model on both tests and beats our fine-tuned e5-base. Fine-tuning still closes most of the gap for e5-base, so fine-tuning BGE-M3 is the next step. Single runs; confidence intervals are not reported yet.
+
 > The sections below were written before this fix. Their absolute numbers and the conclusions that depend on them (e.g. BM25 vs. untuned E5) are superseded by the tables above.
 
 ## Motivation
