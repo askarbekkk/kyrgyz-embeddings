@@ -1,0 +1,20 @@
+# Python dependencies for kyrgyz-embeddings.ipynb (tested on Google Colab, Python 3.13, T4 GPU)
+
+# Retrieval models, training and evaluation
+torch
+sentence-transformers>=6.0.1   # the fine-tuned checkpoints were saved with 6.0.1
+datasets
+huggingface_hub
+rank_bm25
+
+# Analysis and plots
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+
+# LLM query generation (API keys are read from Colab secrets, never stored in the notebook)
+google-genai
+groq
+openai
