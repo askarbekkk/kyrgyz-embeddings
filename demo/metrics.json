@@ -1,0 +1,7 @@
+{
+  "BM25": 0.57,
+  "BGE-M3": 0.841,
+  "n_questions": 900,
+  "n_passages": 488,
+  "n_corpus": 688
+}
